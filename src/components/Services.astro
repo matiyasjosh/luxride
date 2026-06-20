@@ -1,0 +1,192 @@
+
+---
+const services = [
+  {
+    icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 4L22 14H32L24 20L27 30L18 24L9 30L12 20L4 14H14L18 4Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+    title: 'Airport Transfers',
+    description: 'Seamless arrivals and departures. We track your flight in real time and are always on time, regardless of delays.',
+  },
+  {
+    icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 14h28" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="22" r="1.5" fill="currentColor"/></svg>`,
+    title: 'Corporate Travel',
+    description: 'Elevate your business travel experience. Reliable, discreet service for executives and corporate clients worldwide.',
+  },
+  {
+    icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 4c-5.52 0-10 4.48-10 10 0 7.5 10 18 10 18s10-10.5 10-18c0-5.52-4.48-10-10-10z" stroke="currentColor" stroke-width="1.2"/><circle cx="18" cy="14" r="3" stroke="currentColor" stroke-width="1.2"/></svg>`,
+    title: 'City Tours',
+    description: 'Explore in ultimate comfort. Our knowledgeable chauffeurs double as expert guides through the city\'s finest landmarks.',
+  },
+  {
+    icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L20.5 12H27L21.5 15.5L23.5 22L18 18.5L12.5 22L14.5 15.5L9 12H15.5L18 6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="18" cy="28" r="3" stroke="currentColor" stroke-width="1.2"/></svg>`,
+    title: 'Weddings & Events',
+    description: 'Make every special occasion unforgettable. Impeccably presented vehicles and attentive service for your most cherished moments.',
+  },
+  {
+    icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="12" stroke="currentColor" stroke-width="1.2"/><path d="M18 10v8l5 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: '24/7 On-Demand',
+    description: 'Day or night, your luxury ride is just a call or tap away. Our dispatch team operates around the clock.',
+  },
+  {
+    icon: `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 28L10 18L18 22L26 10L30 20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 8l2 2-8 8-4-4-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: 'VIP Protection',
+    description: 'For clients requiring discretion and security. Our trained executive protection chauffeurs ensure your safety at all times.',
+  },
+];
+---
+
+<section id="services" class="services-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-label">What We Offer</p>
+      <div class="gold-line" style="margin: 16px auto;"></div>
+      <h2 class="section-title">Exceptional <em>Services</em></h2>
+      <p class="section-desc">
+        More than transportation — a complete luxury experience tailored to your needs.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((svc, i) => (
+        <div class="service-card fade-up" style={`transition-delay: ${i * 0.1}s`}>
+          <div class="service-icon" set:html={svc.icon} />
+          <h3 class="service-title">{svc.title}</h3>
+          <p class="service-desc">{svc.description}</p>
+          <div class="service-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: var(--space-16) 0;
+    background: var(--color-black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services-section::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+
+  .section-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: var(--color-white);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .section-desc {
+    color: var(--color-gray-2);
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--color-dark-3);
+    border: 1px solid var(--color-dark-3);
+  }
+
+  .service-card {
+    background: var(--color-dark);
+    padding: 40px 36px;
+    position: relative;
+    transition: background 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-gold);
+    transition: width 0.4s ease;
+  }
+
+  .service-card:hover::after {
+    width: 100%;
+  }
+
+  .service-card:hover {
+    background: var(--color-dark-2);
+  }
+
+  .service-icon {
+    color: var(--color-gold);
+    margin-bottom: var(--space-1);
+  }
+
+  .service-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 300;
+    color: var(--color-white);
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    color: var(--color-gray-2);
+    line-height: 1.85;
+    flex: 1;
+  }
+
+  .service-arrow {
+    color: var(--color-gold);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+    margin-top: var(--space-1);
+  }
+
+  .service-card:hover .service-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 900px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 580px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-card {
+      padding: 28px 24px;
+    }
+  }
+</style>

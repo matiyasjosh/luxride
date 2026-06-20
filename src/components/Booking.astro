@@ -1,0 +1,390 @@
+
+---
+---
+
+<section id="booking" class="booking-section">
+  <div class="booking-bg"></div>
+
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-info fade-up">
+        <p class="section-label">Reservations</p>
+        <div class="gold-line" style="margin: 16px 0;"></div>
+        <h2 class="booking-title">
+          Reserve Your<br />
+          <em>Luxury Ride</em>
+        </h2>
+        <p class="booking-subtitle">
+          Our reservation specialists are available 24/7 to craft 
+          the perfect journey for you.
+        </p>
+
+        <div class="booking-contacts">
+          <a href="tel:+18005559999" class="contact-item">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 3h4l2 4-2.5 1.5a10 10 0 005 5L14 11l4 2v4a2 2 0 01-2 2A16 16 0 012 5a2 2 0 012-2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <span class="contact-label">Call Us</span>
+              <strong>+1 (800) 555-9999</strong>
+            </div>
+          </a>
+          <a href="mailto:reserve@luxride.com" class="contact-item">
+            <div class="contact-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="4" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <span class="contact-label">Email</span>
+              <strong>reserve@luxride.com</strong>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="booking-form-wrap fade-up" style="transition-delay: 0.2s;">
+        <form class="booking-form" id="bookingForm">
+          <h3 class="form-title">Quick Reservation</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="fname" placeholder="James" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lname" placeholder="Harrington" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="james@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="time">Time</label>
+              <input type="time" id="time" name="time" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="vehicle">Vehicle Preference</label>
+            <select id="vehicle" name="vehicle">
+              <option value="">Select a vehicle</option>
+              <option value="stretch">Executive Stretch Limousine</option>
+              <option value="mercedes">Mercedes S-Class</option>
+              <option value="escalade">Cadillac Escalade</option>
+              <option value="rolls">Rolls-Royce Ghost</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pickup">Pickup Location</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Address or airport code" required />
+          </div>
+
+          <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" placeholder="Address or landmark" required />
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Special Requests</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Champagne, specific route, accessibility needs..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-secondary form-submit">
+            <span>Confirm Reservation</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="form-success" id="formSuccess">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Your reservation request has been received. We'll confirm within 30 minutes.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('bookingForm') as HTMLFormElement;
+  const success = document.getElementById('formSuccess') as HTMLElement;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit') as HTMLButtonElement;
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      form.querySelectorAll('input, select, textarea').forEach((el) => {
+        (el as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement).value = '';
+      });
+      success.classList.add('visible');
+      btn.style.opacity = '';
+      btn.disabled = false;
+
+      setTimeout(() => success.classList.remove('visible'), 6000);
+    }, 800);
+  });
+</script>
+
+<style>
+  .booking-section {
+    position: relative;
+    padding: var(--space-16) 0;
+    background: var(--color-black);
+    overflow: hidden;
+  }
+
+  .booking-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.pexels.com/photos/1416530/pexels-photo-1416530.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.06;
+  }
+
+  .booking-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .booking-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-top: var(--space-2);
+  }
+
+  .booking-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--color-white);
+    line-height: 1.15;
+  }
+
+  .booking-title em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .booking-subtitle {
+    color: var(--color-gray-2);
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  .booking-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-dark-3);
+    background: var(--color-dark);
+    transition: border-color 0.3s ease;
+  }
+
+  .contact-item:hover {
+    border-color: var(--color-gold);
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .contact-item .contact-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gray-3);
+    margin-bottom: 4px;
+  }
+
+  .contact-item strong {
+    font-size: 0.9rem;
+    color: var(--color-white);
+    font-weight: 400;
+  }
+
+  /* Form */
+  .booking-form-wrap {
+    background: var(--color-dark);
+    border: 1px solid var(--color-dark-3);
+  }
+
+  .booking-form {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .form-title {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-white);
+    margin-bottom: var(--space-1);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gray-2);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--color-dark-2);
+    border: 1px solid var(--color-dark-3);
+    color: var(--color-white-off);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    appearance: none;
+  }
+
+  .form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  .form-group select option {
+    background: var(--color-dark-2);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--color-gold);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--color-gray-4);
+  }
+
+  /* Date/time picker coloring */
+  .form-group input[type="date"],
+  .form-group input[type="time"] {
+    color-scheme: dark;
+  }
+
+  .form-submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--space-1);
+    font-size: 0.75rem;
+    padding: 16px;
+  }
+
+  .form-success {
+    display: none;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(46, 125, 82, 0.1);
+    border: 1px solid rgba(46, 125, 82, 0.4);
+    color: #68c99a;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .form-success.visible {
+    display: flex;
+  }
+
+  .form-success svg {
+    flex-shrink: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .booking-grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .booking-form {
+      padding: 28px 20px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

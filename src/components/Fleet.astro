@@ -1,0 +1,258 @@
+
+---
+const cars = [
+  {
+    name: 'Executive Stretch',
+    tagline: 'The Pinnacle of Luxury',
+    capacity: '8 Passengers',
+    image: 'https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+    features: ['Champagne Bar', 'Starlight Ceiling', 'Privacy Partition', 'Premium Sound'],
+    price: 'From $150/hr',
+  },
+  {
+    name: 'Mercedes S-Class',
+    tagline: 'Business Elegance',
+    capacity: '3 Passengers',
+    image: 'https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+    features: ['Heated Seats', 'WiFi Onboard', 'Refreshment Bar', 'Tinted Glass'],
+    price: 'From $90/hr',
+  },
+  {
+    name: 'Cadillac Escalade',
+    tagline: 'Power & Prestige',
+    capacity: '6 Passengers',
+    image: 'https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+    features: ['All-Terrain', 'Executive Seating', 'Night Vision', 'Remote Start'],
+    price: 'From $120/hr',
+  },
+  {
+    name: 'Rolls-Royce Ghost',
+    tagline: 'Transcendent Luxury',
+    capacity: '4 Passengers',
+    image: 'https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750',
+    features: ['Bespoke Interior', 'Whisper Quiet', 'Starlight Headliner', 'Lambswool Flooring'],
+    price: 'From $250/hr',
+  },
+];
+---
+
+<section id="fleet" class="fleet-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="section-label">Our Fleet</p>
+      <div class="gold-line" style="margin: 16px 0;"></div>
+      <h2 class="section-title">Curated for <em>Distinction</em></h2>
+      <p class="section-desc">
+        Each vehicle in our collection is meticulously maintained and outfitted<br class="br-desktop" />
+        for the most discerning passengers.
+      </p>
+    </div>
+
+    <div class="fleet-grid">
+      {cars.map((car, i) => (
+        <article class="car-card fade-up" style={`transition-delay: ${i * 0.15}s`}>
+          <div class="car-image-wrap">
+            <img src={car.image} alt={car.name} class="car-image" loading="lazy" />
+            <div class="car-image-overlay"></div>
+            <span class="car-price">{car.price}</span>
+            <span class="car-capacity">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="4" r="2.5" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              {car.capacity}
+            </span>
+          </div>
+          <div class="car-info">
+            <p class="car-tagline">{car.tagline}</p>
+            <h3 class="car-name">{car.name}</h3>
+            <ul class="car-features">
+              {car.features.map(f => (
+                <li>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="#booking" class="btn-primary car-btn">
+              <span>Reserve This Vehicle</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fleet-section {
+    padding: var(--space-16) 0;
+    background: var(--color-dark);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+
+  .section-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: var(--color-white);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .section-desc {
+    color: var(--color-gray-2);
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  .br-desktop {
+    display: block;
+  }
+
+  .fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .car-card {
+    background: var(--color-dark-2);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+
+  .car-card:hover {
+    z-index: 2;
+    transform: scale(1.01);
+  }
+
+  .car-image-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .car-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .car-card:hover .car-image {
+    transform: scale(1.08);
+  }
+
+  .car-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.1) 60%);
+  }
+
+  .car-price {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(10,10,10,0.8);
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    backdrop-filter: blur(8px);
+  }
+
+  .car-capacity {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-gray-2);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .car-info {
+    padding: 28px 32px 36px;
+    border: 1px solid var(--color-dark-3);
+    border-top: none;
+  }
+
+  .car-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .car-name {
+    font-size: 1.6rem;
+    color: var(--color-white);
+    margin-bottom: var(--space-3);
+    font-weight: 300;
+  }
+
+  .car-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+    margin-bottom: var(--space-4);
+  }
+
+  .car-features li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--color-gray-2);
+    font-weight: 400;
+  }
+
+  .car-features li svg {
+    color: var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .car-btn {
+    font-size: 0.65rem;
+    padding: 11px 24px;
+  }
+
+  @media (max-width: 768px) {
+    .fleet-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .br-desktop {
+      display: none;
+    }
+
+    .car-info {
+      padding: 20px 20px 28px;
+    }
+
+    .car-features {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

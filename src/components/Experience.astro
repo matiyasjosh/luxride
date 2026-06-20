@@ -1,0 +1,402 @@
+
+---
+---
+
+<section id="experience" class="experience-section">
+  <!-- Parallax quote strip -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      {Array.from({length: 8}).map(() => (
+        <span class="marquee-item">Luxury &nbsp; <span class="gold-dot">&#9632;</span> &nbsp; Comfort &nbsp; <span class="gold-dot">&#9632;</span> &nbsp; Prestige &nbsp; <span class="gold-dot">&#9632;</span> &nbsp; Excellence &nbsp; <span class="gold-dot">&#9632;</span> &nbsp;</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="experience-grid">
+      <div class="experience-media fade-up">
+        <img
+          src="https://images.pexels.com/photos/1590778/pexels-photo-1590778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750"
+          alt="Luxury interior"
+          class="exp-img exp-img-main"
+          loading="lazy"
+        />
+        <img
+          src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
+          alt="Professional chauffeur"
+          class="exp-img exp-img-secondary"
+          loading="lazy"
+        />
+        <div class="exp-badge">
+          <span class="badge-number">15</span>
+          <span class="badge-text">Awards<br/>of Excellence</span>
+        </div>
+      </div>
+
+      <div class="experience-text">
+        <p class="section-label fade-up">The LUXRIDE Experience</p>
+        <div class="gold-line" style="margin: 16px 0;"></div>
+        <h2 class="exp-title fade-up">
+          Where Every Detail<br />
+          <em>Matters</em>
+        </h2>
+        <p class="exp-desc fade-up">
+          From the moment you make a reservation, our team works tirelessly to ensure perfection. 
+          Uniformed chauffeurs, immaculately prepared vehicles, and a service philosophy built on 
+          anticipating your every need.
+        </p>
+
+        <div class="exp-list fade-up">
+          <div class="exp-item">
+            <div class="exp-item-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 10l5 5 9-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Professionally Trained Chauffeurs</strong>
+              <p>Background-checked, licensed, and impeccably dressed professionals.</p>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-item-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 10l5 5 9-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Personalized Amenities</strong>
+              <p>Custom refreshments, preferred music, and cabin temperature — your way.</p>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-item-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M3 10l5 5 9-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Guaranteed Punctuality</strong>
+              <p>We monitor traffic and conditions in real time, always arriving ahead of schedule.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#booking" class="btn-secondary fade-up" style="margin-top: 8px; display: inline-flex;">
+          <span>Schedule a Ride</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="testimonials-wrap">
+    <div class="container">
+      <div class="testimonials-header fade-up">
+        <p class="section-label">Testimonials</p>
+        <div class="gold-line" style="margin: 16px auto;"></div>
+        <h2 class="section-title">Voices of <em>Our Clients</em></h2>
+      </div>
+      <div class="testimonials-grid">
+        {[
+          {
+            quote: "LUXRIDE redefined what I thought luxury travel could be. The attention to detail is simply unmatched.",
+            name: "James Harrington",
+            role: "CEO, Harrington Capital",
+          },
+          {
+            quote: "Our wedding day was perfection — the fleet was immaculate and the chauffeurs were impeccably professional.",
+            name: "Sophie & Michael",
+            role: "Wedding Clients",
+          },
+          {
+            quote: "I travel for business weekly. LUXRIDE is the only car service I trust for punctuality and discretion.",
+            name: "Natalie Chen",
+            role: "Managing Director, Apex Group",
+          },
+        ].map((t, i) => (
+          <div class="testimonial-card fade-up" style={`transition-delay: ${i * 0.15}s`}>
+            <div class="testimonial-stars">
+              {Array.from({length: 5}).map(() => <span class="star">&#9733;</span>)}
+            </div>
+            <p class="testimonial-quote">"{t.quote}"</p>
+            <div class="testimonial-author">
+              <strong>{t.name}</strong>
+              <span>{t.role}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    background: var(--color-dark);
+    overflow: hidden;
+  }
+
+  /* Marquee */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--color-dark-3);
+    border-bottom: 1px solid var(--color-dark-3);
+    padding: 18px 0;
+    background: var(--color-dark-2);
+  }
+
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marqueeScroll 25s linear infinite;
+  }
+
+  .marquee-item {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--color-gray-3);
+    font-style: italic;
+    padding-right: 0;
+    flex-shrink: 0;
+  }
+
+  .gold-dot {
+    color: var(--color-gold);
+    font-size: 0.5rem;
+    vertical-align: middle;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Experience Grid */
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: var(--space-16) 0;
+  }
+
+  .experience-media {
+    position: relative;
+  }
+
+  .exp-img {
+    border: 1px solid var(--color-dark-3);
+  }
+
+  .exp-img-main {
+    width: 85%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+
+  .exp-img-secondary {
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    width: 52%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 3px solid var(--color-dark);
+  }
+
+  .exp-badge {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: var(--color-gold);
+    color: var(--color-black);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 100px;
+  }
+
+  .badge-number {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .badge-text {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .experience-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .exp-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--color-white);
+  }
+
+  .exp-title em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .exp-desc {
+    color: var(--color-gray-2);
+    font-size: 0.92rem;
+    line-height: 1.9;
+  }
+
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .exp-item {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .exp-item-icon {
+    color: var(--color-gold);
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .exp-item strong {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-white-off);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .exp-item p {
+    font-size: 0.8rem;
+    color: var(--color-gray-3);
+    line-height: 1.6;
+  }
+
+  /* Testimonials */
+  .testimonials-wrap {
+    padding: var(--space-16) 0;
+    border-top: 1px solid var(--color-dark-3);
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--color-white);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--color-dark-3);
+  }
+
+  .testimonial-card {
+    background: var(--color-dark-2);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition: background 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    background: var(--color-dark);
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 4px;
+  }
+
+  .star {
+    color: var(--color-gold);
+    font-size: 0.9rem;
+  }
+
+  .testimonial-quote {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--color-gray-1);
+    line-height: 1.8;
+    flex: 1;
+  }
+
+  .testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-dark-3);
+  }
+
+  .testimonial-author strong {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-white);
+    letter-spacing: 0.08em;
+  }
+
+  .testimonial-author span {
+    font-size: 0.7rem;
+    color: var(--color-gold);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 900px) {
+    .experience-grid {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+
+    .exp-img-secondary {
+      bottom: -30px;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .testimonial-card {
+      padding: 28px 24px;
+    }
+  }
+</style>
