@@ -3,26 +3,35 @@
 ---
 
 <section id="hero" class="hero">
-  <canvas id="hero-canvas"></canvas>
-
+  <!-- The background image with a subtle zoom animation -->
+  <div class="hero-bg" style="background-image: url('zema-1.jpg');"></div>
+  
+  <!-- Elegant gradient overlay to make text pop while showcasing the car and chauffeur -->
   <div class="hero-overlay"></div>
 
   <div class="container hero-content">
     <div class="hero-left">
-      <p class="section-label fade-up">Premium Chauffeur Service</p>
+      <div class="brand-tag fade-up">
+        <span class="line"></span>
+        <p>Zema Executive Limo</p>
+      </div>
+      
       <h1 class="hero-title fade-up">
         Arrive in<br />
         <em>Pure Luxury</em>
       </h1>
+      
       <p class="hero-subtitle fade-up">
-        Unrivaled elegance. Flawless precision.<br />
-        Every journey, an experience to remember.
+      Unrivaled elegance. Flawless precision. Every journey with ZEMA 
+      Executive Limo is an experience crafted to be remembered.
       </p>
+
+      
       <div class="hero-actions fade-up">
-        <a href="#booking" class="btn-secondary">
+        <a href="#booking" class="btn-primary glow-effect">
           <span>Book a Ride</span>
         </a>
-        <a href="#fleet" class="btn-primary">
+        <a href="#fleet" class="btn-secondary glass-effect">
           <span>View Fleet</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -31,20 +40,23 @@
       </div>
     </div>
 
-    <div class="hero-stats fade-up">
-      <div class="stat">
-        <span class="stat-number">12+</span>
-        <span class="stat-label">Years of Excellence</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-number">5K+</span>
-        <span class="stat-label">Happy Clients</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-number">24/7</span>
-        <span class="stat-label">Availability</span>
+    <!-- Stats moved to an elegant glassmorphism floating bar at the bottom -->
+    <div class="hero-stats-wrapper fade-up">
+      <div class="hero-stats glass-panel">
+        <div class="stat">
+          <span class="stat-number">1</span>
+          <span class="stat-label">Year of<br>Excellence</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Happy<br>Clients</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Premium<br>Availability</span>
+        </div>
       </div>
     </div>
   </div>
@@ -55,452 +67,336 @@
   </div>
 </section>
 
+<!-- Lightweight script to trigger the fade-up animations on load -->
 <script>
-  import * as THREE from 'three';
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
-  camera.position.set(0, 2, 10);
-  camera.lookAt(0, 0, 0);
-
-  // Fog
-  scene.fog = new THREE.FogExp2(0x0a0a0a, 0.045);
-
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-  scene.add(ambientLight);
-
-  const goldLight = new THREE.PointLight(0xc9a84c, 8, 20);
-  goldLight.position.set(3, 4, 3);
-  goldLight.castShadow = true;
-  scene.add(goldLight);
-
-  const rimLight = new THREE.PointLight(0xffffff, 4, 25);
-  rimLight.position.set(-5, 3, -3);
-  scene.add(rimLight);
-
-  const headLight = new THREE.DirectionalLight(0xfff5e0, 2);
-  headLight.position.set(0, 8, 5);
-  headLight.castShadow = true;
-  scene.add(headLight);
-
-  const underGlow = new THREE.PointLight(0xc9a84c, 3, 10);
-  underGlow.position.set(0, -1, 0);
-  scene.add(underGlow);
-
-  // --- Limousine body (extended sedan) ---
-  const carGroup = new THREE.Group();
-  scene.add(carGroup);
-
-  const bodyMat = new THREE.MeshPhysicalMaterial({
-    color: 0x0d0d0d,
-    metalness: 0.95,
-    roughness: 0.05,
-    reflectivity: 1,
-    clearcoat: 1,
-    clearcoatRoughness: 0.05,
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
   });
-
-  const chromeMat = new THREE.MeshPhysicalMaterial({
-    color: 0xd4af77,
-    metalness: 1,
-    roughness: 0.05,
-    reflectivity: 1,
-  });
-
-  const glassMat = new THREE.MeshPhysicalMaterial({
-    color: 0x1a2a3a,
-    metalness: 0,
-    roughness: 0,
-    transmission: 0.7,
-    transparent: true,
-    opacity: 0.5,
-  });
-
-  const tireMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.8 });
-  const rimMat = new THREE.MeshPhysicalMaterial({ color: 0xc0a050, metalness: 1, roughness: 0.1 });
-
-  // Main body — elongated
-  const bodyGeo = new THREE.BoxGeometry(5.8, 0.55, 2.0);
-  const body = new THREE.Mesh(bodyGeo, bodyMat);
-  body.position.y = 0.4;
-  body.castShadow = true;
-  carGroup.add(body);
-
-  // Cabin top
-  const cabinGeo = new THREE.BoxGeometry(4.2, 0.65, 1.82);
-  const cabin = new THREE.Mesh(cabinGeo, bodyMat);
-  cabin.position.set(-0.2, 0.96, 0);
-  cabin.castShadow = true;
-  carGroup.add(cabin);
-
-  // Windshield
-  const windshieldGeo = new THREE.BoxGeometry(0.06, 0.55, 1.6);
-  const windshield = new THREE.Mesh(windshieldGeo, glassMat);
-  windshield.position.set(1.86, 0.86, 0);
-  windshield.rotation.z = 0.35;
-  carGroup.add(windshield);
-
-  // Rear windshield
-  const rearGeo = new THREE.BoxGeometry(0.06, 0.55, 1.6);
-  const rearWind = new THREE.Mesh(rearGeo, glassMat);
-  rearWind.position.set(-2.26, 0.86, 0);
-  rearWind.rotation.z = -0.35;
-  carGroup.add(rearWind);
-
-  // Side windows
-  const sideWinGeo = new THREE.BoxGeometry(3.4, 0.42, 0.04);
-  const sideWinL = new THREE.Mesh(sideWinGeo, glassMat);
-  sideWinL.position.set(-0.2, 0.96, 0.93);
-  carGroup.add(sideWinL);
-  const sideWinR = new THREE.Mesh(sideWinGeo, glassMat);
-  sideWinR.position.set(-0.2, 0.96, -0.93);
-  carGroup.add(sideWinR);
-
-  // Bumpers
-  const frontBumperGeo = new THREE.BoxGeometry(0.15, 0.3, 2.0);
-  const frontBumper = new THREE.Mesh(frontBumperGeo, chromeMat);
-  frontBumper.position.set(2.98, 0.22, 0);
-  carGroup.add(frontBumper);
-
-  const rearBumperGeo = new THREE.BoxGeometry(0.15, 0.3, 2.0);
-  const rearBumper = new THREE.Mesh(rearBumperGeo, chromeMat);
-  rearBumper.position.set(-2.98, 0.22, 0);
-  carGroup.add(rearBumper);
-
-  // Grille
-  const grilleGeo = new THREE.BoxGeometry(0.08, 0.22, 1.2);
-  const grille = new THREE.Mesh(grilleGeo, chromeMat);
-  grille.position.set(2.93, 0.5, 0);
-  carGroup.add(grille);
-
-  // Headlights
-  const headlightGeo = new THREE.BoxGeometry(0.08, 0.1, 0.36);
-  const headlightMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff5d0, emissiveIntensity: 3 });
-  [-0.56, 0.56].forEach(z => {
-    const hl = new THREE.Mesh(headlightGeo, headlightMat);
-    hl.position.set(2.94, 0.56, z);
-    carGroup.add(hl);
-  });
-
-  // Taillights
-  const taillightMat = new THREE.MeshStandardMaterial({ color: 0xff1111, emissive: 0xff0000, emissiveIntensity: 2 });
-  [-0.56, 0.56].forEach(z => {
-    const tl = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.1, 0.36), taillightMat);
-    tl.position.set(-2.94, 0.56, z);
-    carGroup.add(tl);
-  });
-
-  // Roof ornament / antenna
-  const antennaGeo = new THREE.CylinderGeometry(0.012, 0.012, 0.5, 8);
-  const antenna = new THREE.Mesh(antennaGeo, chromeMat);
-  antenna.position.set(1.2, 1.35, 0);
-  carGroup.add(antenna);
-
-  // Side chrome strip
-  const stripGeo = new THREE.BoxGeometry(5.5, 0.03, 0.03);
-  const stripL = new THREE.Mesh(stripGeo, chromeMat);
-  stripL.position.set(0, 0.4, 1.02);
-  carGroup.add(stripL);
-  const stripR = new THREE.Mesh(stripGeo, chromeMat);
-  stripR.position.set(0, 0.4, -1.02);
-  carGroup.add(stripR);
-
-  // Wheels — 3 axles for stretch limo feel
-  const wheelPositions = [
-    [1.9, 1.0], [1.9, -1.0],
-    [0, 1.0], [0, -1.0],
-    [-1.9, 1.0], [-1.9, -1.0],
-  ];
-
-  wheelPositions.forEach(([x, z]) => {
-    const tireGeo = new THREE.CylinderGeometry(0.48, 0.48, 0.26, 32);
-    const tire = new THREE.Mesh(tireGeo, tireMat);
-    tire.rotation.x = Math.PI / 2;
-    tire.position.set(x, -0.02, z as number);
-    carGroup.add(tire);
-
-    const rimGeo = new THREE.CylinderGeometry(0.3, 0.3, 0.28, 16);
-    const rim = new THREE.Mesh(rimGeo, rimMat);
-    rim.rotation.x = Math.PI / 2;
-    rim.position.set(x, -0.02, z as number);
-    carGroup.add(rim);
-
-    // Spokes
-    for (let i = 0; i < 8; i++) {
-      const spokeGeo = new THREE.BoxGeometry(0.04, 0.55, 0.3);
-      const spoke = new THREE.Mesh(spokeGeo, rimMat);
-      spoke.rotation.z = (i / 8) * Math.PI * 2;
-      spoke.position.set(x, -0.02, z as number);
-      carGroup.add(spoke);
-    }
-  });
-
-  // Ground plane (reflective)
-  const groundGeo = new THREE.PlaneGeometry(60, 60);
-  const groundMat = new THREE.MeshPhysicalMaterial({
-    color: 0x080808,
-    metalness: 0.2,
-    roughness: 0.4,
-    reflectivity: 0.8,
-  });
-  const ground = new THREE.Mesh(groundGeo, groundMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.5;
-  ground.receiveShadow = true;
-  scene.add(ground);
-
-  // Ground grid lines
-  const gridHelper = new THREE.GridHelper(60, 40, 0xc9a84c, 0x1a1a1a);
-  (gridHelper.material as THREE.Material & { opacity: number; transparent: boolean }).opacity = 0.15;
-  (gridHelper.material as THREE.Material & { transparent: boolean }).transparent = true;
-  gridHelper.position.y = -0.49;
-  scene.add(gridHelper);
-
-  // Particle field (floating dust/sparkles)
-  const particleCount = 300;
-  const particlePositions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount; i++) {
-    particlePositions[i * 3] = (Math.random() - 0.5) * 30;
-    particlePositions[i * 3 + 1] = Math.random() * 8;
-    particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 15;
-  }
-  const particleGeo = new THREE.BufferGeometry();
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-  const particleMat = new THREE.PointsMaterial({
-    color: 0xc9a84c,
-    size: 0.04,
-    transparent: true,
-    opacity: 0.5,
-  });
-  const particles = new THREE.Points(particleGeo, particleMat);
-  scene.add(particles);
-
-  // Car position & animation
-  carGroup.position.set(1.5, 0.52, 0);
-  carGroup.rotation.y = -0.3;
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let targetRotY = -0.3;
-  let targetRotX = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
-
-  // Window resize
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  let clock = new THREE.Clock();
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    // Gentle float
-    carGroup.position.y = 0.52 + Math.sin(t * 0.6) * 0.04;
-
-    // Mouse-driven rotation
-    targetRotY = -0.3 + mouseX * 0.2;
-    targetRotX = mouseY * 0.06;
-    carGroup.rotation.y += (targetRotY - carGroup.rotation.y) * 0.05;
-    carGroup.rotation.x += (targetRotX - carGroup.rotation.x) * 0.05;
-
-    // Particles drift
-    particles.rotation.y = t * 0.03;
-
-    // Gold light pulse
-    goldLight.intensity = 7 + Math.sin(t * 1.2) * 1;
-    underGlow.intensity = 2 + Math.sin(t * 0.8 + 1) * 1;
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
 </script>
 
 <style>
+  /* --- BASE HERO STYLES --- */
   .hero {
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 700px;
+    min-height: 800px;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--color-black);
+    background-color: #050505;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, sans-serif; /* Replace with your primary font */
   }
 
-  #hero-canvas {
-    position: absolute;
-    inset: 0;
+  .container {
     width: 100%;
-    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* --- BACKGROUND & OVERLAY --- */
+  .hero-bg {
+    position: absolute;
+    inset: -5%; /* Slightly larger for the zoom effect */
+    width: 110%;
+    height: 110%;
+    background-size: cover;
+    background-position: center 30%; /* Focuses slightly above center to keep chauffeur's face visible */
+    opacity: 45%;
+    background-repeat: no-repeat;
     z-index: 0;
+    animation: gentleZoom 25s linear infinite alternate;
+  }
+
+  @keyframes gentleZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      105deg,
-      rgba(10, 10, 10, 0.85) 0%,
-      rgba(10, 10, 10, 0.5) 50%,
-      rgba(10, 10, 10, 0.2) 100%
-    );
     z-index: 1;
+    /* Darker on the left for text, transitioning to clear on the right for the car/chauffeur */
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.7) 40%,
+      rgba(0, 0, 0, 0.2) 80%,
+      rgba(0, 0, 0, 0.1) 100%
+    ),
+    /* Bottom gradient to blend stats smoothly */
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      transparent 30%
+    );
   }
 
+  /* --- CONTENT LAYOUT --- */
   .hero-content {
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    padding-top: 100px;
+    padding-top: 5vh;
   }
 
   .hero-left {
-    max-width: 560px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 1.5rem;
+  }
+
+  /* --- TYPOGRAPHY --- */
+  .brand-tag {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .brand-tag .line {
+    width: 40px;
+    height: 1px;
+    background-color: #d4af37; /* Gold */
+  }
+
+  .brand-tag p {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #d4af37;
+    font-weight: 500;
+    margin: 0;
   }
 
   .hero-title {
-    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
     font-weight: 300;
-    color: var(--color-white);
-    line-height: 1.05;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
   .hero-title em {
     font-style: italic;
-    color: var(--color-gold);
+    font-family: 'Playfair Display', serif; /* Replace with your var(--font-serif) */
+    color: #d4af37;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
-    color: var(--color-gray-2);
-    line-height: 1.8;
+    font-size: 1.125rem;
+    color: #e0e0e0;
+    line-height: 1.6;
     font-weight: 300;
+    margin: 0;
+    max-width: 80%;
   }
 
+  /* --- BUTTONS --- */
   .hero-actions {
     display: flex;
-    gap: var(--space-3);
+    gap: 1rem;
     flex-wrap: wrap;
-    margin-top: var(--space-2);
+    margin-top: 1rem;
   }
 
-  .hero-stats {
+  .btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2.2rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: #d4af37;
+    color: #000000;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: #e5c158;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+  }
+
+  .btn-secondary.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #d4af37;
+    transform: translateY(-2px);
+  }
+
+  /* --- STATS SECTION (Glassmorphism) --- */
+  .hero-stats-wrapper {
+    position: absolute;
+    bottom: 80px;
+    left: 2rem;
+  }
+
+  .glass-panel {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
-    margin-top: var(--space-10);
+    gap: 2.5rem;
+    background: rgba(15, 15, 15, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 1.5rem 3rem;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
 
   .stat {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 1rem;
   }
 
   .stat-number {
-    font-family: var(--font-serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--color-gold);
+    font-family: 'Playfair Display', serif; /* Replace with var(--font-serif) */
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #d4af37;
     line-height: 1;
   }
 
   .stat-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-gray-3);
+    color: #a0a0a0;
     font-weight: 500;
+    line-height: 1.4;
   }
 
   .stat-divider {
     width: 1px;
     height: 40px;
-    background: var(--color-gray-4);
+    background: rgba(255, 255, 255, 0.1);
   }
 
+  /* --- SCROLL INDICATOR --- */
   .scroll-indicator {
     position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 30px;
+    right: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     z-index: 2;
   }
 
   .scroll-line {
     width: 1px;
-    height: 50px;
-    background: linear-gradient(to bottom, var(--color-gold), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
+    height: 60px;
+    background: linear-gradient(to bottom, #d4af37, transparent);
+    animation: scrollPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   .scroll-indicator span {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--color-gray-3);
-    font-weight: 500;
+    color: #888;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
   }
 
   @keyframes scrollPulse {
-    0%, 100% { opacity: 1; transform: scaleY(1); }
-    50% { opacity: 0.4; transform: scaleY(0.7); }
+    0% { transform-origin: top; transform: scaleY(0); opacity: 0; }
+    50% { transform-origin: top; transform: scaleY(1); opacity: 1; }
+    51% { transform-origin: bottom; transform: scaleY(1); opacity: 1; }
+    100% { transform-origin: bottom; transform: scaleY(0); opacity: 0; }
   }
 
+  /* --- ANIMATIONS --- */
   .fade-up {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .fade-up:nth-child(1) { transition-delay: 0.2s; }
-  .fade-up:nth-child(2) { transition-delay: 0.4s; }
-  .fade-up:nth-child(3) { transition-delay: 0.6s; }
-  .fade-up:nth-child(4) { transition-delay: 0.8s; }
-  .fade-up:nth-child(5) { transition-delay: 1s; }
+  .hero-left .fade-up:nth-child(1) { transition-delay: 0.2s; }
+  .hero-left .fade-up:nth-child(2) { transition-delay: 0.4s; }
+  .hero-left .fade-up:nth-child(3) { transition-delay: 0.6s; }
+  .hero-left .fade-up:nth-child(4) { transition-delay: 0.8s; }
+  .hero-stats-wrapper.fade-up { transition-delay: 1.0s; }
 
   .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  /* --- RESPONSIVE DESIGN --- */
+  @media (max-width: 992px) {
+    .hero-overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.8) 50%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
+    }
   }
 
   @media (max-width: 768px) {
-    .hero-stats {
-      gap: var(--space-4);
-      margin-top: var(--space-6);
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 3.5rem);
+    }
+    
+    .hero-subtitle {
+      max-width: 100%;
     }
 
-    .hero-title {
-      font-size: clamp(2.2rem, 8vw, 3.5rem);
+    .hero-stats-wrapper {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      margin-top: 3rem;
+    }
+
+    .glass-panel {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .stat-divider {
+      width: 100%;
+      height: 1px;
+    }
+
+    .scroll-indicator {
+      display: none; /* Hide on mobile to save space */
     }
   }
 </style>
