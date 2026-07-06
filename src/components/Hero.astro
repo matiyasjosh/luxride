@@ -101,7 +101,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
     position: relative;
     z-index: 2;
   }
@@ -109,7 +109,7 @@
   /* --- BACKGROUND & OVERLAY --- */
   .hero-bg {
     position: absolute;
-    inset: -5%; /* Slightly larger for the zoom effect */
+    inset: -10%; /* Slightly larger for the zoom effect */
     width: 110%;
     height: 110%;
     background-size: cover;
@@ -184,7 +184,7 @@
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    font-size: clamp(4rem, 7vw, 4rem);
     font-weight: 300;
     color: #ffffff;
     line-height: 1.1;
@@ -199,8 +199,8 @@
   }
 
   .hero-subtitle {
-    font-size: 1.125rem;
-    color: #e0e0e0;
+    font-size: 1rem;
+    color: #C7C7AD;
     line-height: 1.6;
     font-weight: 300;
     margin: 0;
@@ -226,6 +226,7 @@
     text-transform: uppercase;
     text-decoration: none;
     transition: all 0.3s ease;
+    border-radius: 2rem;
   }
 
   .btn-primary {
@@ -256,16 +257,14 @@
   /* --- STATS SECTION (Glassmorphism) --- */
   .hero-stats-wrapper {
     position: absolute;
-    bottom: 80px;
-    left: 2rem;
+    bottom: 10%;
+    left: 45%;
   }
 
   .glass-panel {
     display: flex;
     align-items: center;
     gap: 2.5rem;
-    background: rgba(15, 15, 15, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     padding: 1.5rem 3rem;
