@@ -7,23 +7,20 @@ const cars = [
     capacity: '3 Passengers',
     image: 'zema-chevy-4.jpeg',
     features: ['Champagne Bar', 'Starlight Ceiling', 'Privacy Partition', 'Premium Sound'],
-    price: 'From $120/hr',
   },
   {
-    name: 'Chevrolet Suburban Z71',
+    name: 'Mercedes-Benz',
     tagline: 'Business Elegance',
     capacity: '3 Passengers',
-    image: 'zema-chevy-6.jpg',
+    image: 'mercedes-benz.avif',
     features: ['Heated Seats', 'WiFi Onboard', 'Refreshment Bar', 'Tinted Glass'],
-    price: 'From $120/hr',
   },
   {
-    name: 'Chevrolet Suburban RST',
+    name: 'Cadillac Escalade',
     tagline: 'Power & Prestige',
     capacity: '3 Passengers',
-    image: 'zema-chevy-7.avif',
+    image: 'cadillac-1.jpg',
     features: ['All-Terrain', 'Executive Seating', 'Night Vision', 'Remote Start'],
-    price: 'From $120/hr',
   },
   {
     name: 'Chevrolet Suburban',
@@ -31,7 +28,6 @@ const cars = [
     capacity: '3 Passengers',
     image: 'zema-2.jpg',
     features: ['Bespoke Interior', 'Whisper Quiet', 'Starlight Headliner', 'Lambswool Flooring'],
-    price: 'From $120/hr',
   },
 ];
 ---
@@ -54,7 +50,6 @@ const cars = [
           <div class="car-image-wrap">
             <img src={car.image} alt={car.name} class="car-image" loading="lazy" />
             <div class="car-image-overlay"></div>
-            <span class="car-price">{car.price}</span>
             <span class="car-capacity">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <circle cx="7" cy="4" r="2.5" stroke="currentColor" stroke-width="1.2"/>
@@ -236,6 +231,7 @@ const cars = [
   .car-btn {
     font-size: 0.65rem;
     padding: 11px 24px;
+    border-radius: 2rem;
   }
 
   @media (max-width: 768px) {
